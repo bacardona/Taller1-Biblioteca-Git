@@ -10,11 +10,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-    }
+}
     static String readText(String message) {
     System.out.print(message);
     return sc.nextLine();
-    }
+}
     
     static void createClient() {
     System.out.println("\n-- Create Client --");
@@ -29,7 +29,7 @@ public class Main {
 
     System.out.println("Client created successfully.");
     
-    }
+}
     static void listClients() {
     System.out.println("\n-- Client List --");
 
@@ -42,4 +42,22 @@ public class Main {
         System.out.println(c);
     }
 }
+    static Client findClientById(String id) {
+    for (Client c : clients) {
+        if (c.getId().equalsIgnoreCase(id)) {
+            return c;
+        }
+    }
+    return null;
+}
+    static void searchClient() {
+    System.out.println("\n-- Search Client --");
+
+    String id = readText("Id to search: ");
+
+    Client c = findClientById(id);
+
+    System.out.println(c != null ? c : "Client not found.");
+}
+    
 }
