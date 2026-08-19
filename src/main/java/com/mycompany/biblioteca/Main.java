@@ -77,5 +77,21 @@ public class Main {
 
     System.out.println("Client updated successfully.");
 }
+    static void deleteClient() {
+    System.out.println("\n-- Delete Client --");
+
+    String id = readText("Id of the client to delete: ");
+
+    Client c = findClientById(id);
+
+    if (c == null) {
+        System.out.println("Client not found.");
+        return;
+    }
+
+    clients.remove(c);
+
+    System.out.println("Client deleted successfully.");
+}
     
 }
