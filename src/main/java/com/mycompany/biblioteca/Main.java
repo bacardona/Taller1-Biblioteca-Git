@@ -59,5 +59,23 @@ public class Main {
 
     System.out.println(c != null ? c : "Client not found.");
 }
+    static void updateClient() {
+    System.out.println("\n-- Update Client --");
+
+    String id = readText("Id of the client to update: ");
+
+    Client c = findClientById(id);
+
+    if (c == null) {
+        System.out.println("Client not found.");
+        return;
+    }
+
+    c.setName(readText("New name: "));
+    c.setPhone(readText("New phone: "));
+    c.setEmail(readText("New email: "));
+
+    System.out.println("Client updated successfully.");
+}
     
 }
