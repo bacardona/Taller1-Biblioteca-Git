@@ -106,6 +106,22 @@ static void updateBook() {
 
     System.out.println("Book updated successfully.");
 }
+    static void deleteBook() {
+    System.out.println("\n-- Delete Book --");
+
+    String code = readText("Code of the book to delete: ");
+
+    Book b = findBookByCode(code);
+
+    if (b == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    books.remove(b);
+
+    System.out.println("Book deleted successfully.");
+}
     
     static void listClients() {
     System.out.println("\n-- Client List --");
