@@ -88,6 +88,24 @@ static void searchBook() {
     System.out.println(b != null ? b : "Book not found.");
 }
 
+static void updateBook() {
+    System.out.println("\n-- Update Book --");
+
+    String code = readText("Code of the book to update: ");
+
+    Book b = findBookByCode(code);
+
+    if (b == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    b.setTitle(readText("New title: "));
+    b.setPublicationYear(readInt("New publication year: "));
+    b.setAuthor(readText("New author: "));
+
+    System.out.println("Book updated successfully.");
+}
     
     static void listClients() {
     System.out.println("\n-- Client List --");
