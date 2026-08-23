@@ -7,6 +7,8 @@ public class Main {
 
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Book> books = new ArrayList<>();
+    
 
     public static void main(String[] args) {
 
@@ -14,6 +16,17 @@ public class Main {
     static String readText(String message) {
     System.out.print(message);
     return sc.nextLine();
+}
+    
+    static int readInt(String message) {
+    System.out.print(message);
+    while (!sc.hasNextInt()) {
+        System.out.print("Enter a valid number: ");
+        sc.next();
+    }
+    int value = sc.nextInt();
+    sc.nextLine();
+    return value;
 }
     
     static void createClient() {
@@ -30,6 +43,20 @@ public class Main {
     System.out.println("Client created successfully.");
     
 }
+    
+    static void createBook() {
+    System.out.println("\n-- Create Book --");
+
+    String code = readText("Code: ");
+    String title = readText("Title: ");
+    int year = readInt("Publication year: ");
+    String author = readText("Author: ");
+
+    books.add(new Book(code, title, year, author, true));
+
+    System.out.println("Book created successfully.");
+}
+    
     static void listClients() {
     System.out.println("\n-- Client List --");
 
