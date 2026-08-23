@@ -69,6 +69,25 @@ public class Main {
     }
 }
     
+    static Book findBookByCode(String code) {
+    for (Book b : books) {
+        if (b.getCode().equalsIgnoreCase(code)) {
+            return b;
+        }
+    }
+    return null;
+}
+
+static void searchBook() {
+    System.out.println("\n-- Search Book --");
+
+    String code = readText("Code to search: ");
+
+    Book b = findBookByCode(code);
+
+    System.out.println(b != null ? b : "Book not found.");
+}
+
     
     static void listClients() {
     System.out.println("\n-- Client List --");
