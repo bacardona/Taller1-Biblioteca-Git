@@ -7,6 +7,8 @@ public class Main {
 
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
+    static ArrayList<Book> books = new ArrayList<>();
+    
 
     public static void main(String[] args) {
 
@@ -14,6 +16,17 @@ public class Main {
     static String readText(String message) {
     System.out.print(message);
     return sc.nextLine();
+}
+    
+    static int readInt(String message) {
+    System.out.print(message);
+    while (!sc.hasNextInt()) {
+        System.out.print("Enter a valid number: ");
+        sc.next();
+    }
+    int value = sc.nextInt();
+    sc.nextLine();
+    return value;
 }
     
     static void createClient() {
@@ -30,6 +43,86 @@ public class Main {
     System.out.println("Client created successfully.");
     
 }
+    
+    static void createBook() {
+    System.out.println("\n-- Create Book --");
+
+    String code = readText("Code: ");
+    String title = readText("Title: ");
+    int year = readInt("Publication year: ");
+    String author = readText("Author: ");
+
+    books.add(new Book(code, title, year, author, true));
+
+    System.out.println("Book created successfully.");
+}
+    static void listBooks() {
+    System.out.println("\n-- Book List --");
+
+    if (books.isEmpty()) {
+        System.out.println("No books registered.");
+        return;
+    }
+
+    for (Book b : books) {
+        System.out.println(b);
+    }
+}
+    
+    static Book findBookByCode(String code) {
+    for (Book b : books) {
+        if (b.getCode().equalsIgnoreCase(code)) {
+            return b;
+        }
+    }
+    return null;
+}
+
+static void searchBook() {
+    System.out.println("\n-- Search Book --");
+
+    String code = readText("Code to search: ");
+
+    Book b = findBookByCode(code);
+
+    System.out.println(b != null ? b : "Book not found.");
+}
+
+static void updateBook() {
+    System.out.println("\n-- Update Book --");
+
+    String code = readText("Code of the book to update: ");
+
+    Book b = findBookByCode(code);
+
+    if (b == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    b.setTitle(readText("New title: "));
+    b.setPublicationYear(readInt("New publication year: "));
+    b.setAuthor(readText("New author: "));
+
+    System.out.println("Book updated successfully.");
+}
+    static void deleteBook() {
+    System.out.println("\n-- Delete Book --");
+
+    String code = readText("Code of the book to delete: ");
+
+    Book b = findBookByCode(code);
+
+    if (b == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    books.remove(b);
+
+    System.out.println("Book deleted successfully.");
+}
+    
     static void listClients() {
     System.out.println("\n-- Client List --");
 
