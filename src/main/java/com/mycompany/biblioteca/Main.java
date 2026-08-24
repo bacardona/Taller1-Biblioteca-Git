@@ -10,9 +10,79 @@ public class Main {
     static ArrayList<Book> books = new ArrayList<>();
     static ArrayList<Loan> loans = new ArrayList<>();
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
+    int option;
+
+    do {
+        System.out.println("\n===== LIBRARY MANAGEMENT SYSTEM =====");
+        System.out.println("1. Create Client");
+        System.out.println("2. List Clients");
+        System.out.println("3. Search Client");
+        System.out.println("4. Update Client");
+        System.out.println("5. Delete Client");
+        System.out.println("6. Create Book");
+        System.out.println("7. List Books");
+        System.out.println("8. Search Book");
+        System.out.println("9. Update Book");
+        System.out.println("10. Delete Book");
+        System.out.println("11. Create Loan");
+        System.out.println("12. Return Book");
+        System.out.println("13. List Loans");
+        System.out.println("0. Exit");
+
+        option = readInt("Select an option: ");
+
+        switch (option) {
+            case 1:
+                createClient();
+                break;
+            case 2:
+                listClients();
+                break;
+            case 3:
+                searchClient();
+                break;
+            case 4:
+                updateClient();
+                break;
+            case 5:
+                deleteClient();
+                break;
+            case 6:
+                createBook();
+                break;
+            case 7:
+                listBooks();
+                break;
+            case 8:
+                searchBook();
+                break;
+            case 9:
+                updateBook();
+                break;
+            case 10:
+                deleteBook();
+                break;
+            case 11:
+                createLoan();
+                break;
+            case 12:
+                returnBook();
+                break;
+            case 13:
+                listLoans();
+                break;
+            case 0:
+                System.out.println("Goodbye!");
+                break;
+            default:
+                System.out.println("Invalid option.");
+        }
+
+    } while (option != 0);
 }
+
     static String readText(String message) {
     System.out.print(message);
     return sc.nextLine();
