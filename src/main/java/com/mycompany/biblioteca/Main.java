@@ -8,7 +8,7 @@ public class Main {
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Book> books = new ArrayList<>();
-    
+    static ArrayList<Loan> loans = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -122,6 +122,90 @@ static void updateBook() {
 
     System.out.println("Book deleted successfully.");
 }
+    
+    static void createLoan() {
+    System.out.println("\n-- Create Loan --");
+
+    String loanId = readText("Loan ID: ");
+    String clientId = readText("Client ID: ");
+    String bookCode = readText("Book code: ");
+
+    Client client = findClientById(clientId);
+    if (client == null) {
+        System.out.println("Client not found.");
+        return;
+    }
+
+    Book book = findBookByCode(bookCode);
+    if (book == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    if (!book.isAvailable()) {
+        System.out.println("Book is not available.");
+        return;
+    }
+
+    Loan loan = new Loan(
+            loanId,
+            client,
+            book,
+            java.time.LocalDate.now(),
+            "ACTIVE"
+    );
+
+    loans.add(loan);
+    book.setAvailable(false);
+
+    System.out.println("Loan created successfully.");
+}
+    
+    static void returnBook() {
+    System.out.println("\n-- Return Book --");
+
+    String loanId = readText("Loan ID to return: ");
+
+    Loan loan = findLoanById(loanId);
+
+    if (loan == null) {
+        System.out.println("Loan not found.");
+        return;
+    }
+
+    if (loan.getStatus().equals("RETURNED")) {
+        System.out.println("Loan already returned.");
+        return;
+    }
+
+    loan.setStatus("RETURNED");
+    loan.getBook().setAvailable(true);
+
+    System.out.println("Book returned successfully.");
+}
+    
+    static Loan findLoanById(String loanId) {
+    for (Loan loan : loans) {
+        if (loan.getLoanId().equalsIgnoreCase(loanId)) {
+            return loan;
+        }
+    }
+    return null;
+}
+    
+    static void listLoans() {
+    System.out.println("\n-- Loan List --");
+
+    if (loans.isEmpty()) {
+        System.out.println("No loans registered.");
+        return;
+    }
+
+    for (Loan loan : loans) {
+        System.out.println(loan);
+    }
+}
+    
     
     static void listClients() {
     System.out.println("\n-- Client List --");
