@@ -193,6 +193,19 @@ static void updateBook() {
     return null;
 }
     
+    static void listLoans() {
+    System.out.println("\n-- Loan List --");
+
+    if (loans.isEmpty()) {
+        System.out.println("No loans registered.");
+        return;
+    }
+
+    for (Loan loan : loans) {
+        System.out.println(loan);
+    }
+}
+    
     
     static void listClients() {
     System.out.println("\n-- Client List --");
