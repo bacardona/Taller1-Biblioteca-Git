@@ -8,7 +8,7 @@ public class Main {
     static ArrayList<Client> clients = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Book> books = new ArrayList<>();
-    
+    static ArrayList<Loan> loans = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -121,6 +121,44 @@ static void updateBook() {
     books.remove(b);
 
     System.out.println("Book deleted successfully.");
+}
+    
+    static void createLoan() {
+    System.out.println("\n-- Create Loan --");
+
+    String loanId = readText("Loan ID: ");
+    String clientId = readText("Client ID: ");
+    String bookCode = readText("Book code: ");
+
+    Client client = findClientById(clientId);
+    if (client == null) {
+        System.out.println("Client not found.");
+        return;
+    }
+
+    Book book = findBookByCode(bookCode);
+    if (book == null) {
+        System.out.println("Book not found.");
+        return;
+    }
+
+    if (!book.isAvailable()) {
+        System.out.println("Book is not available.");
+        return;
+    }
+
+    Loan loan = new Loan(
+            loanId,
+            client,
+            book,
+            java.time.LocalDate.now(),
+            "ACTIVE"
+    );
+
+    loans.add(loan);
+    book.setAvailable(false);
+
+    System.out.println("Loan created successfully.");
 }
     
     static void listClients() {
