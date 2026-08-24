@@ -161,6 +161,39 @@ static void updateBook() {
     System.out.println("Loan created successfully.");
 }
     
+    static void returnBook() {
+    System.out.println("\n-- Return Book --");
+
+    String loanId = readText("Loan ID to return: ");
+
+    Loan loan = findLoanById(loanId);
+
+    if (loan == null) {
+        System.out.println("Loan not found.");
+        return;
+    }
+
+    if (loan.getStatus().equals("RETURNED")) {
+        System.out.println("Loan already returned.");
+        return;
+    }
+
+    loan.setStatus("RETURNED");
+    loan.getBook().setAvailable(true);
+
+    System.out.println("Book returned successfully.");
+}
+    
+    static Loan findLoanById(String loanId) {
+    for (Loan loan : loans) {
+        if (loan.getLoanId().equalsIgnoreCase(loanId)) {
+            return loan;
+        }
+    }
+    return null;
+}
+    
+    
     static void listClients() {
     System.out.println("\n-- Client List --");
 
